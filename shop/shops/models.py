@@ -19,7 +19,7 @@ class customer(models.Model):
 class product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(default='',blank=True,null=True)
-    price = models.DecimalField(default=0,decimal_places=2,max_digits=12)
+    price = models.DecimalField(default=0,decimal_places=0,max_digits=12)
     picture = models.ImageField(upload_to='uploed/products/',blank=True)
     category = models.ForeignKey(category,on_delete=models.CASCADE)
     def __str__(self):
