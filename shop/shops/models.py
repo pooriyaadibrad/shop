@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 class category(models.Model):
     name = models.CharField(max_length=20)
@@ -22,6 +23,10 @@ class product(models.Model):
     price = models.DecimalField(default=0,decimal_places=0,max_digits=12)
     picture = models.ImageField(upload_to='uploed/products/',blank=True)
     category = models.ForeignKey(category,on_delete=models.CASCADE)
+    is_sale = models.BooleanField(default=False)
+    sale_price = models.DecimalField(default=0,decimal_places=0,max_digits=12)
+    stars = models.IntegerField(default=0,validators=[MaxValueValidator(5),MinValueValidator(0)])
+
     def __str__(self):
         return self.name
 class order(models.Model):
