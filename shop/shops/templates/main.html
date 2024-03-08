@@ -32,6 +32,11 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">خانه</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">درباره ما</a></li>
+                        {% if user.is_authenticated  %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">خارج شوید</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">وارد شوید</a></li>
+                        {% endif %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">فروشگاه</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -52,7 +57,13 @@
                 </div>
             </div>
         </nav>
+        {% for message in messages %}
+        <div class="alert alert-info" role="alert">
+               <button  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{message}}
 
+        </div>
+        {% endfor %}
         <!-- Header-->
         <header class="bg-dark py-5 img-container" >
             <div class="container px-4 px-lg-5 my-5">
